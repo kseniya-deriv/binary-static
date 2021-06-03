@@ -17,6 +17,7 @@ const IPHistoryData = (() => {
             { name: 'Binary app', regex: /binary\.com V([\d.]+)/i },
             { name: 'iPhone', regex: /\b(iPhone\d*)\b.*(DP2P)\b/ig },
             { name: 'Android', regex: /\b(Android\d*)\b.*(DP2P)\b/ig },
+            { name: 'Dart', regex: /dart\/([\d\w.-]+)/i },
         ];
         for (let i = 0; i < lookup.length; i++) {
             const info  = lookup[i];

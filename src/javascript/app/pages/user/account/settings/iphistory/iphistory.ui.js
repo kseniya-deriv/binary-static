@@ -11,12 +11,11 @@ const IPHistoryUI = (() => {
         const status       = data.success ? localize('Successful') : localize('Failed');
         const action       = localize(data.action /* localize-ignore */);  // from login_history API call, can be (login|logout)
         const browser      = data.browser;
-        const app = browser.app && ` ${browser.app} app`;
         let browser_string = browser ? `${browser.name} v${browser.version}` : 'Unknown';
-        if (app) {
-            browser_string += `${app}`;
+        if (browser && browser.app) {
+            browser_string += ` ${browser.app} app`;
         }
-        const patt         = /(opera|chrome|safari|firefox|IE|Edge|SeaMonkey|Chromium|Binary app|Android|iPhone) v[0-9.]+(\b.*DP2P app)?$/i;
+        const patt         = /(opera|chrome|safari|firefox|IE|Edge|SeaMonkey|Chromium|Binary app|Android|iPhone|Dart) v[0-9.]+(\b.*DP2P app)?$/i;
         if (!patt.test(browser_string) && browser_string !== 'Unknown') {
             browser_string = 'Error';
         }
