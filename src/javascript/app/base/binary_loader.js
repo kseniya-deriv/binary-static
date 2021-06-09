@@ -37,6 +37,8 @@ const BinaryLoader = (() => {
 
         localizeForLang(urlLang());
 
+        checkAppidAndQAserver();
+
         Page.showNotificationOutdatedBrowser();
 
         Client.init();
@@ -48,6 +50,16 @@ const BinaryLoader = (() => {
         BinaryPjax.init(container, '#content');
         ThirdPartyLinks.init();
 
+    };
+
+    const checkAppidAndQAserver = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const qa_server = urlParams.get('qa_server');
+        const app_id = urlParams.get('app_id');
+        if (qa_server && app_id) {
+            localStorage.setItem('config.server_url', qa_server);
+            localStorage.setItem('config.app_id', app_id);
+        }
     };
 
     const beforeContentChange = () => {
@@ -108,6 +120,7 @@ const BinaryLoader = (() => {
         no_mf            : () => localize('Binary options trading is not available in your financial account.'),
         options_blocked  : () => localize('Binary options trading is not available in your country.'),
         residence_blocked: () => localize('This page is not available in your country of residence.'),
+        not_deactivated  : () => localize('Page not available, you did not deactivate your account.'),
     };
 
     const loadHandler = (this_page) => {
